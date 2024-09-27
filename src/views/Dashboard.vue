@@ -4,11 +4,7 @@
       <Sidebar />
     </div>
     <div class="flex-1 justify-center my-6 mx-4">
-      <div
-        class="bg-gray-200 dark:bg-gray-800 rounded-lg px-6 py-4 bg-opacity-50 backdrop-filter backdrop-blur-lg z-10 shadow-md"
-      >
-        <MainContent />
-      </div>
+      <MainContent />
     </div>
   </div>
 </template>

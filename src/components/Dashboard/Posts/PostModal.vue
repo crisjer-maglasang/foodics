@@ -1,5 +1,4 @@
 <template>
-  <div class="fixed">
     <ModalWrapper :show="isOpen" :close="close" title="Post Details">
       <div v-if="loading" class="flex justify-center items-center">
         <LoaderSpinner />
@@ -18,7 +17,6 @@
         </div>
       </div>
     </ModalWrapper>
-  </div>
 </template>
 
 <script>

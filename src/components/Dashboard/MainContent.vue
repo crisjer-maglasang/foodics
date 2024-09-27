@@ -1,5 +1,7 @@
 <template>
-  <div class="p-4">
+  <div
+    class="bg-gray-200 dark:bg-gray-800 rounded-lg px-10 py-8 bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-md"
+  >
     <PostsTable
       :posts="posts"
       :loading="loading"
