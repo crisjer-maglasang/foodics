@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gray-200 dark:bg-gray-800 rounded-lg px-10 py-8 bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-md"
+    class="bg-gray-200 dark:bg-gray-800 rounded-lg px-10 py-8 bg-opacity-50 backdrop-filter shadow-md"
   >
     <PostsTable
       :posts="posts"

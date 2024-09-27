@@ -3,19 +3,8 @@
     ref="paginatorContainer"
     :class="['px-3 py-2.5 flex items-center justify-between', classes]"
   >
-    <!-- <div v-if="isLarge">
-      <p class="text-sm text-gray-700 text-center">
-        Showing
-        <span class="font-medium">{{ rowStart ? rowStart : 0 }}</span>
-        to
-        <span class="font-medium">{{ rowEnd ? rowEnd : 0 }}</span>
-        of
-        <span class="font-medium">{{ totalItems ? totalItems : 0 }}</span>
-        results
-      </p>
-    </div> -->
     <div>
-      <nav
+      <div
         class="items-center relative gap-2 z-0 flex rounded-md -space-x-px"
         aria-label="Pagination"
       >
@@ -46,17 +35,6 @@
         />
 
         <div class="flex items-center gap-2">
-          <!-- <div class="w-12">
-            <FormElement
-              type="text"
-              name="currentPage"
-              :value="selectedPage"
-              :keyup="handlePageKeyUp"
-              :blur="handlePageBlur"
-              :input="handlePageChange"
-              :disabled="disabled"
-            />
-          </div> -->
           <div
             class="text-sm sm:flex-1 sm:flex sm:items-center sm:justify-between"
           >
@@ -77,7 +55,7 @@
           :buttonIcon="ChevronDoubleRightIcon"
           :disabled="selectedPage === pageCount || disabled"
         />
-      </nav>
+      </div>
     </div>
   </div>
 </template>
