@@ -1,6 +1,6 @@
 <template>
   <header
-    class="sticky top-0 w-full h-20 items-center bg-gray-200 dark:bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg z-10 shadow-md"
+    class="sticky top-0 w-full h-20 items-center bg-gray-200/50 dark:bg-gray-800/50 backdrop-filter backdrop-blur-lg z-10 shadow-md"
   >
     <div class="container h-full mx-auto flex justify-between items-center">
       <div class="flex items-center justify-center gap-6 px-6">
