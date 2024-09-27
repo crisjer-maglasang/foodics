@@ -1,9 +1,9 @@
 <template>
-  <tbody class="divide-y">
+  <tbody :class="classes">
     <TableRow
       v-for="(row, rowIndex) in normalizedRows"
       :key="rowIndex"
-      :class="['text-gray-600 text-sm', row.isHeaderRow ? '' : classNames]"
+      :class="['text-sm', row.isHeaderRow ? '' : headerClasses]"
       @click="onSelect ? () => onSelect(data[rowIndex]) : undefined"
       @mouseenter="handleMouseEnter(rowIndex)"
       @mouseleave="handleMouseLeave"
@@ -42,7 +42,11 @@ export default defineComponent({
       type: Function,
       default: undefined,
     },
-    classNames: {
+    classes: {
+      type: String,
+      default: "",
+    },
+    headerClasses: {
       type: String,
       default: "",
     },

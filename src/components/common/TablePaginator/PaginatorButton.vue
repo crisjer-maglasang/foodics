@@ -4,10 +4,10 @@
     @click="click"
     :disabled="disabled"
     :class="[
-      'h-10 relative items-center px-2 rounded-md border border-gray-300 text-sm font-medium',
+      'h-10 items-center px-2 rounded-md text-sm font-medium',
       disabled
-        ? 'text-gray-200 dark:text-gray-500 cursor-default'
-        : 'text-gray-500 dark:text-gray-100 hover:bg-gray-50',
+        ? 'text-gray-300 dark:text-gray-700 cursor-default'
+        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700',
     ]"
   >
     <span class="sr-only">{{ value }}</span>

@@ -3,7 +3,7 @@
     ref="paginatorContainer"
     :class="['px-3 py-2.5 flex items-center justify-between', classes]"
   >
-    <div v-if="isLarge">
+    <!-- <div v-if="isLarge">
       <p class="text-sm text-gray-700 text-center">
         Showing
         <span class="font-medium">{{ rowStart ? rowStart : 0 }}</span>
@@ -13,7 +13,7 @@
         <span class="font-medium">{{ totalItems ? totalItems : 0 }}</span>
         results
       </p>
-    </div>
+    </div> -->
     <div>
       <nav
         class="items-center relative gap-2 z-0 flex rounded-md -space-x-px"
@@ -45,8 +45,8 @@
           :disabled="selectedPage === 1 || disabled"
         />
 
-        <div v-if="isSmall" class="flex items-center gap-2">
-          <div class="w-12">
+        <div class="flex items-center gap-2">
+          <!-- <div class="w-12">
             <FormElement
               type="text"
               name="currentPage"
@@ -56,11 +56,11 @@
               :input="handlePageChange"
               :disabled="disabled"
             />
-          </div>
+          </div> -->
           <div
             class="text-sm sm:flex-1 sm:flex sm:items-center sm:justify-between"
           >
-            <span>of {{ pageCount ? pageCount : 0 }}</span>
+            <span>{{ selectedPage }} of {{ pageCount ? pageCount : 0 }}</span>
           </div>
         </div>
 
@@ -83,16 +83,7 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  toRefs,
-  computed,
-  ref,
-  onMounted,
-  onBeforeUnmount,
-} from "vue";
-import ResizeObserver from "resize-observer-polyfill";
-import debounce from "lodash.debounce";
+import { defineComponent, toRefs, computed, ref } from "vue";
 import {
   ChevronDoubleLeftIcon,
   ChevronLeftIcon,
@@ -152,10 +143,6 @@ export default defineComponent({
       toRefs(props);
 
     const initialPage = ref(1);
-    const paginatorContainer = ref(null);
-    const isSmall = ref(false);
-    const isMedium = ref(false);
-    const isLarge = ref(false);
 
     const pageCount = computed(() =>
       Math.ceil(totalItems.value / pageSize.value)
@@ -212,44 +199,6 @@ export default defineComponent({
       }
     };
 
-    const updateContainerClass = debounce((width) => {
-      if (width > 380) {
-        isSmall.value = true;
-        isMedium.value = false;
-        isLarge.value = false;
-      } else if (width > 640) {
-        isSmall.value = true;
-        isMedium.value = true;
-        isLarge.value = false;
-      } else if (width > 768) {
-        isSmall.value = true;
-        isMedium.value = true;
-        isLarge.value = true;
-      } else {
-        isSmall.value = false;
-        isMedium.value = false;
-        isLarge.value = false;
-      }
-    }, 100);
-
-    let observer;
-    onMounted(() => {
-      observer = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-          updateContainerClass(entry.contentRect.width);
-        }
-      });
-      if (paginatorContainer.value) {
-        observer.observe(paginatorContainer.value);
-      }
-    });
-
-    onBeforeUnmount(() => {
-      if (paginatorContainer.value) {
-        observer.unobserve(paginatorContainer.value);
-      }
-    });
-
     return {
       pageCount,
       rowStart,
@@ -264,10 +213,6 @@ export default defineComponent({
       ChevronLeftIcon,
       ChevronRightIcon,
       ChevronDoubleRightIcon,
-      paginatorContainer,
-      isSmall,
-      isMedium,
-      isLarge,
     };
   },
 });

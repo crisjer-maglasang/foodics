@@ -1,6 +1,10 @@
 <template>
-    <div v-if="isOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-      <div class="bg-white dark:bg-gray-800 p-4 rounded max-w-lg w-full">
+  <div class="fixed">
+    <ModalWrapper :show="isOpen" :close="close" title="Post Details">
+      <div v-if="loading" class="flex justify-center items-center">
+        <LoaderSpinner />
+      </div>
+      <div v-else class="bg-white dark:bg-gray-800 p-4 rounded max-w-lg w-full">
         <h2 class="text-xl font-bold mb-4">{{ post.title }}</h2>
         <p class="mb-4">{{ post.body }}</p>
         <div v-if="comments.length">
@@ -12,41 +16,65 @@
             </li>
           </ul>
         </div>
-        <button @click="closeModal" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Close</button>
       </div>
-    </div>
-  </template>
-  
-  <script>
-  import { ref, watch } from 'vue'
-  
-  export default {
-    props: {
-      post: Object,
-      isOpen: Boolean
+    </ModalWrapper>
+  </div>
+</template>
+
+<script>
+import { ref, watch, defineComponent } from "vue";
+import { ModalWrapper } from "@/components/common/Modal";
+import LoaderSpinner from "@/components/common/LoaderSpinner.vue";
+
+export default defineComponent({
+  components: {
+    ModalWrapper,
+    LoaderSpinner,
+  },
+  props: {
+    post: {
+      type: [Object, null],
+      required: true,
     },
-    setup(props, { emit }) {
-      const comments = ref([])
-  
-      const fetchComments = async () => {
-        if (props.post && props.post.id) {
-          const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${props.post.id}/comments`)
-          comments.value = await response.json()
+    isOpen: {
+      type: Boolean,
+      default: false,
+    },
+    close: {
+      type: Function,
+      required: true,
+    },
+  },
+  setup(props) {
+    const comments = ref([]);
+    const loading = ref(false);
+
+    const fetchComments = async () => {
+      loading.value = true;
+      if (props.post && props.post.id) {
+        try {
+          const response = await fetch(
+            `https://jsonplaceholder.typicode.com/posts/${props.post.id}/comments`
+          );
+          comments.value = await response.json();
+        } catch (error) {
+          console.error("Error fetching comments:", error);
+        } finally {
+          loading.value = false;
         }
       }
-  
-      watch(() => props.isOpen, (newVal) => {
+    };
+
+    watch(
+      () => props.isOpen,
+      (newVal) => {
         if (newVal) {
-          fetchComments()
+          fetchComments();
         }
-      })
-  
-      const closeModal = () => {
-        emit('close')
       }
-  
-      return { comments, closeModal }
-    }
-  }
-  </script>
-  
+    );
+
+    return { comments, loading };
+  },
+});
+</script>

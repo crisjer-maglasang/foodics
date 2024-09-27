@@ -3,7 +3,7 @@
     <div class="flex w-full md:w-80 justify-center relative mt-6 px-4">
       <Sidebar />
     </div>
-    <div class="flex-1 justify-center relative my-6 mx-4">
+    <div class="flex-1 justify-center my-6 mx-4">
       <div
         class="bg-gray-200 dark:bg-gray-800 rounded-lg px-6 py-4 bg-opacity-50 backdrop-filter backdrop-blur-lg z-10 shadow-md"
       >

@@ -1,15 +1,11 @@
 <template>
-  <thead class="bg-gray-50 divide-y whitespace-nowrap">
-    <TableRow
-      v-for="(row, rowIndex) in normalizedRows"
-      :key="rowIndex"
-      class="text-gray-600 text-xs uppercase"
-    >
+  <thead :class="classes">
+    <TableRow v-for="(row, rowIndex) in normalizedRows" :key="rowIndex">
       <TableCell
         v-for="(cell, cellIndex) in row.cells"
         :key="cellIndex"
         :type="'th'"
-        class="py-3 font-normal"
+        :class="cellClasses"
         v-bind="cell"
       />
     </TableRow>
@@ -33,10 +29,17 @@ export default defineComponent({
       type: Array,
       required: true,
     },
+    classes: {
+      type: String,
+      default: "",
+    },
+    cellClasses: {
+      type: String,
+      default: "",
+    },
   },
   setup(props) {
     const normalizedRows = computed(() => normalizeRows(props.rows));
-    console.log("normalizedRows", normalizedRows.value);
     return {
       normalizedRows,
     };

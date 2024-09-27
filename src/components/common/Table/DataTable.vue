@@ -1,7 +1,7 @@
 <template>
   <div>
     <LoaderSpinner v-if="loading" />
-    <table v-else class="min-w-full bg-white dark:bg-gray-800">
+    <table v-else :class="classes">
       <TableHead v-if="theader" v-bind="theader" />
       <TableBody v-if="tbody" v-bind="tbody" />
     </table>
@@ -47,6 +47,10 @@ export default defineComponent({
     pagination: {
       type: Object,
       default: null,
+    },
+    classes: {
+      type: String,
+      default: "",
     },
   },
 });

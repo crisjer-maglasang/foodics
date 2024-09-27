@@ -6,9 +6,11 @@
   >
     <span v-if="isReadMore && truncatedValue !== value">
       {{ isExpanded ? value : truncatedValue }}
-      <span @click.stop="toggleReadMore" class="cursor-pointer underline">{{
-        isExpanded ? "Show less" : "Read more"
-      }}</span>
+      <span
+        @click.stop="toggleReadMore"
+        class="cursor-pointer text-xs hover:underline text-blue-500 text italic"
+        >{{ isExpanded ? "Show less" : "Read more" }}</span
+      >
     </span>
     <span v-else>{{ hoverValue && isHovered ? hoverValue : value }}</span>
   </component>
